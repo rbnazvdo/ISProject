@@ -1,9 +1,15 @@
 p {
 
     font-family: 'Times New Roman', Times, serif;
+    color: black;
 
 }
 body {
     background-color: rgb(213, 246, 247);
+}
+
+header {
+    font-weight: bolder;
+    font-style: italic;
 }
 
