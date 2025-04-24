@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Guess the Number Game</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f2f2f2;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        h1 {
+            color: #2c3e50;
+        }
+        .game-box {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+        input[type="number"] {
+            padding: 0.5rem;
+            width: 80px;
+            font-size: 1rem;
+        }
+        button {
+            margin-top: 1rem;
+            padding: 0.6rem 1.2rem;
+            font-size: 1rem;
+            background-color: #3498db;
+            border: none;
+            color: white;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        #message {
+            margin-top: 1rem;
+            font-weight: bold;
+        }
+        a {
+            margin-top: 2rem;
+            display: inline-block;
+            color: #2980b9;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-box">
+        <h1>Guess the Number</h1>
+        <p>I'm thinking of a number between 1 and 100...</p>
+        <input type="number" id="guessInput" min="1" max="100">
+        <br>
+        <button onclick="checkGuess()">Guess</button>
+        <p id="message"></p>
+        <button onclick="resetGame()">Play Again</button>
+    </div>
+
+    <a href="scratch.html">← Back to Scratch Page</a>
+
+    <script>
+        let secretNumber = Math.floor(Math.random() * 100) + 1;
+        let attempts = 0;
+
+        function checkGuess() {
+            const guess = parseInt(document.getElementById('guessInput').value);
+            const message = document.getElementById('message');
+            attempts++;
+
+            if (isNaN(guess) || guess < 1 || guess > 100) {
+                message.textContent = "Please enter a valid number between 1 and 100.";
+            } else if (guess === secretNumber) {
+                message.textContent = `🎉 Correct! You guessed it in ${attempts} tries!`;
+            } else if (guess < secretNumber) {
+                message.textContent = "Too low. Try again!";
+            } else {
+                message.textContent = "Too high. Try again!";
+            }
+        }
+
+        function resetGame() {
+            secretNumber = Math.floor(Math.random() * 100) + 1;
+            attempts = 0;
+            document.getElementById('guessInput').value = '';
+            document.getElementById('message').textContent = '';
+        }
+    </script>
+</body>
+</html>
